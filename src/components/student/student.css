@@ -1,0 +1,32 @@
+.student {
+  display: flex;
+
+  h2 {
+    width: 12em;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    border: 2px solid black;
+  }
+  
+  button {
+    width: 3em;
+    height: 2.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 3px;
+    padding: 0;
+  }
+
+  .pending {
+    border: 2px solid rgb(204, 117, 4);
+  }
+
+  .missing {
+    border: 2px solid rgb(245, 39, 39);
+  }
+
+}

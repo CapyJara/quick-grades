@@ -1,11 +1,11 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import studentAsses from '../../data/john-pending.json';
 import { getAllStudents, getAsses } from '../services/getGrades';
 import Students from '../components/student/Students';
 
 
-class Main extends PureComponent {
+class Main extends Component {
   state = {
     students: [],
     studentAsses: null,

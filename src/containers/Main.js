@@ -1,20 +1,35 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import studentList from '../../data/students.json';
-import Students from '../components/student/Students.js';
 import studentAsses from '../../data/john-pending.json';
+import { getAllStudents, getAsses } from '../services/getGrades';
+import Students from '../components/student/Students';
+
 
 class Main extends PureComponent {
   state = {
-    students: studentList,
-    studentAsses: studentAsses
+    students: [],
+    studentAsses: null,
+    studentLoading: true,
+    assLoading: false
   };
+
+  componentDidMount() {
+    getAllStudents().then(students => this.setState({ students }))
+      .then(() => this.setState({ studentLoading: false }));
+  }
+
+  handleClick = (id) => {
+    this.setState({ assLoading: true });
+    getAsses(id)
+      .then(asses => this.setState(state => ({ ...state, studentAsses: asses })))
+      .then(() => this.setState({ assLoading: true }));
+  }
 
   render() {
 
     return (
       <>
-        <Students students={this.state.students} />
+        { !this.state.studentLoading && <Students students={this.state.students} selectStudent={this.handleClick}/>}
       </>
     );
   }

@@ -3,12 +3,21 @@ import PropTypes from 'prop-types';
 import Student from './Student';
 import styles from './students.css';
 
-const Students = ({ students }) => {
-  const studentItems = students.sort((a, b) => (b.pendingSubmissions.length - a.pendingSubmissions.length)).map((student, i) => {
-    return (
-      <Student key={i} name={student.name} pending={student.pendingSubmissions.length} missing={student.missingSubmissions.length} />
-    );
-  });
+const Students = ({ students, selectStudent }) => {
+  const studentItems = students
+    .sort((a, b) => (b.pendingSubmissions.length - a.pendingSubmissions.length))
+    .map((student, i) => {
+      return (
+        <Student 
+          key={i} 
+          id={student.id}
+          name={student.name} 
+          pending={student.pendingSubmissions.length} 
+          missing={student.missingSubmissions.length}
+          selectStudent={selectStudent} 
+        />
+      );
+    });
 
   return (
     <ul className={styles.students}>
@@ -18,7 +27,8 @@ const Students = ({ students }) => {
 };
 
 Students.propTypes = {
-  students: PropTypes.array.isRequired
+  students: PropTypes.array.isRequired,
+  selectStudent: PropTypes.func.isRequired,
 };
 
 export default Students;

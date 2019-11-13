@@ -4,13 +4,14 @@ import Students from '../components/student/Students';
 import Asses from '../components/asses/Asses';
 import styles from './main.css';
 import loading from '../../assets/loading.gif';
+import scorpion from '../../assets/scorpion.png';
 
 class Main extends Component {
   state = {
     students: [],
     studentAsses: null,
     studentLoading: true,
-    assLoading: true
+    assLoading: false
   };
 
   componentDidMount() {
@@ -19,7 +20,10 @@ class Main extends Component {
   }
 
   handleClick = (kido) => {
-    this.setState({ assLoading: true });
+    this.setState({ 
+      assLoading: true,
+      studentAsses: null
+    });
     getAsses(kido)
       .then(asses => this.setState(state => ({ ...state, studentAsses: asses })))
       .then(() => this.setState({ assLoading: false }));
@@ -41,8 +45,9 @@ class Main extends Component {
     }
     return (
       <section className={styles.bigGuy}>
-        { !this.state.studentLoading && <Students students={this.state.students} selectStudent={this.handleClick} handleStudentSelect={this.handleStudentSelect}/>}
-        {!this.state.assLoading && <Asses asses={this.state.studentAsses}/>}
+        {!this.state.studentLoading && <Students students={this.state.students} selectStudent={this.handleClick} handleStudentSelect={this.handleStudentSelect}/>}
+        {this.state.studentAsses && <Asses asses={this.state.studentAsses}/>}
+        {this.state.assLoading && <div className={styles.scorpLoader}><img src={scorpion} /></div>}
       </section>
     );
   }

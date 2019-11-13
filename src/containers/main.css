@@ -18,3 +18,25 @@
   color: blue;
   transform: scale(1.05);
 }
+
+@keyframes spinner {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+       transform: rotate(360deg);
+  }
+}
+
+.scorpLoader {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  img {
+    height: 25em;
+    animation-name: spinner;
+    animation-duration: 1.5s;
+  }
+}

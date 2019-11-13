@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
 import { getAllStudents, getAsses } from '../services/getGrades';
 import Students from '../components/student/Students';
 import Asses from '../components/asses/Asses';
 import styles from './main.css';
-
 
 class Main extends Component {
   state = {
@@ -27,7 +25,13 @@ class Main extends Component {
   }
 
   render() {
-
+    if(this.state.studentLoading) {
+      return (
+        <section className={styles.loading}>
+          <img src="../../../assets/loading.gif" />
+        </section>
+      );
+    }
     return (
       <section className={styles.bigGuy}>
         { !this.state.studentLoading && <Students students={this.state.students} selectStudent={this.handleClick}/>}

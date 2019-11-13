@@ -13,7 +13,9 @@ class Main extends Component {
     studentAsses: null,
     studentLoading: false,
     assLoading: false,
-    apiKey: null
+    apiKey: null,
+    err: null,
+    assErr: null
   };
 
   handleChange = ({ target }) => {
@@ -25,7 +27,11 @@ class Main extends Component {
     this.setState({ studentLoading: true });
     getAllStudents(this.state.apiKey)
       .then(students => this.setState({ students }))
-      .then(() => this.setState({ studentLoading: false }));
+      .then(() => this.setState({ studentLoading: false }))
+      .catch(err => this.setState({ 
+        err,
+        studentLoading: false
+      }));
   }
 
   handleClick = (kido) => {
@@ -33,9 +39,13 @@ class Main extends Component {
       assLoading: true,
       studentAsses: null
     });
-    getAsses(kido)
+    getAsses(kido, this.state.apiKey)
       .then(asses => this.setState(state => ({ ...state, studentAsses: asses })))
-      .then(() => this.setState({ assLoading: false }));
+      .then(() => this.setState({ assLoading: false }))
+      .catch(err => this.setState({ 
+        assErr: err,
+        assLoading: false
+      }));
   }
 
   handleStudentSelect(e) {
@@ -52,7 +62,11 @@ class Main extends Component {
     });
     getFreshies(this.state.apiKey)
       .then(students => this.setState({ students }))
-      .then(() => this.setState({ studentLoading: false }));
+      .then(() => this.setState({ studentLoading: false }))
+      .catch(err => this.setState({ 
+        err,
+        studentLoading: false
+      }));
   }
 
   render() {
@@ -63,6 +77,14 @@ class Main extends Component {
         </section>
       );
     }
+    if(this.state.err) {
+      return (
+        <>
+          <ApiForm handleChange={this.handleChange} handleFormSubmit={this.handleFormSubmit} getFreshData={this.getFreshData} />
+          <h2>Could not fetch</h2>
+        </>
+      );
+    }
     return (
       <>
         <ApiForm handleChange={this.handleChange} handleFormSubmit={this.handleFormSubmit} getFreshData={this.getFreshData} />
@@ -70,6 +92,7 @@ class Main extends Component {
           {!this.state.studentLoading && <Students students={this.state.students} selectStudent={this.handleClick} handleStudentSelect={this.handleStudentSelect}/>}
           {this.state.studentAsses && <Asses asses={this.state.studentAsses}/>}
           {this.state.assLoading && <div className={styles.scorpLoader}><img src={scorpion} /></div>}
+          {this.state.assErr && <h2>Error loading asses</h2>}
         </section>}
       </>
     );

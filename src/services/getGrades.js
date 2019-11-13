@@ -30,11 +30,11 @@ export function getFreshies(apiKey) {
     });
 }
 
-export function getAsses(kido) {
+export function getAsses(kido, apiKey) {
   const assIds = kido.pending.map(ass => ass.assignmentId).join(',');
   return fetch(`https://thawing-dusk-78361.herokuapp.com/api/v1/canvas/assignments?ids=${assIds}&student=${kido.id}`, {
     headers: {
-      'x-api-key': 'NBQ&Ecp2OD^00cL*9WW%Vu#cOJB&Nq%I'
+      'x-api-key': apiKey
     } 
   })
     .then(res => ([res.ok, res.json()]))

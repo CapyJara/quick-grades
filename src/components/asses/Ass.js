@@ -11,7 +11,7 @@ function Ass({ ass }) {
 }
 
 Ass.propTypes = {
-  ass: PropTypes.obj
+  ass: PropTypes.object
 };
 
 export default Ass;

@@ -19,9 +19,9 @@ class Main extends Component {
       .then(() => this.setState({ studentLoading: false }));
   }
 
-  handleClick = (id) => {
+  handleClick = (kido) => {
     this.setState({ assLoading: true });
-    getAsses(id)
+    getAsses(kido)
       .then(asses => this.setState(state => ({ ...state, studentAsses: asses })))
       .then(() => this.setState({ assLoading: false }));
   }

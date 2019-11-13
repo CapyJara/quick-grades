@@ -12,8 +12,8 @@ const Students = ({ students, selectStudent }) => {
           key={i} 
           id={student.id}
           name={student.name} 
-          pending={student.pendingSubmissions.length} 
-          missing={student.missingSubmissions.length}
+          pending={student.pendingSubmissions} 
+          missing={student.missingSubmissions}
           selectStudent={selectStudent} 
         />
       );

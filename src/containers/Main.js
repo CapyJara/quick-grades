@@ -3,6 +3,7 @@ import { getAllStudents, getAsses } from '../services/getGrades';
 import Students from '../components/student/Students';
 import Asses from '../components/asses/Asses';
 import styles from './main.css';
+import loading from '../../assets/loading.gif';
 
 class Main extends Component {
   state = {
@@ -28,7 +29,7 @@ class Main extends Component {
     if(this.state.studentLoading) {
       return (
         <section className={styles.loading}>
-          <img src="../../../assets/loading.gif" />
+          <img src={loading} />
         </section>
       );
     }

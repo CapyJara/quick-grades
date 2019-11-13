@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import studentAsses from '../../data/john-pending.json';
+// import PropTypes from 'prop-types';
 import { getAllStudents, getAsses } from '../services/getGrades';
 import Students from '../components/student/Students';
+import Asses from '../components/asses/Asses';
+import styles from './main.css';
 
 
 class Main extends Component {
@@ -10,7 +11,7 @@ class Main extends Component {
     students: [],
     studentAsses: null,
     studentLoading: true,
-    assLoading: false
+    assLoading: true
   };
 
   componentDidMount() {
@@ -22,15 +23,16 @@ class Main extends Component {
     this.setState({ assLoading: true });
     getAsses(id)
       .then(asses => this.setState(state => ({ ...state, studentAsses: asses })))
-      .then(() => this.setState({ assLoading: true }));
+      .then(() => this.setState({ assLoading: false }));
   }
 
   render() {
 
     return (
-      <>
+      <section className={styles.bigGuy}>
         { !this.state.studentLoading && <Students students={this.state.students} selectStudent={this.handleClick}/>}
-      </>
+        {!this.state.assLoading && <Asses asses={this.state.studentAsses}/>}
+      </section>
     );
   }
 }

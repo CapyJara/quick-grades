@@ -15,7 +15,9 @@ const Student = ({ id, name, pending, missing, selectStudent }) => {
 Student.propTypes = {
   name: PropTypes.string.isRequired,
   pending: PropTypes.number.isRequired,
-  missing: PropTypes.number.isRequired
+  missing: PropTypes.number.isRequired,
+  id: PropTypes.number.isRequired,
+  selectStudent: PropTypes.func.isRequired,
 };
 
 export default Student;

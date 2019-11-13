@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { getAllStudents, getAsses } from '../services/getGrades';
+import { getAllStudents, getAsses, getFreshies } from '../services/getGrades';
 import Students from '../components/student/Students';
 import Asses from '../components/asses/Asses';
 import styles from './main.css';
 import loading from '../../assets/loading.gif';
 import scorpion from '../../assets/scorpion.png';
-import ApiForm from '../components/ApiForm';
+import ApiForm from '../components/form/ApiForm';
 
 class Main extends Component {
   state = {
@@ -44,6 +44,17 @@ class Main extends Component {
     e.currentTarget.className = `${e.currentTarget.className} ${styles.selected}`;
   }
 
+  getFreshData = () => {
+    this.setState({
+      studentLoading: true,
+      students: [],
+      studentAsses: null
+    });
+    getFreshies(this.state.apiKey)
+      .then(students => this.setState({ students }))
+      .then(() => this.setState({ studentLoading: false }));
+  }
+
   render() {
     if(this.state.studentLoading) {
       return (
@@ -54,7 +65,7 @@ class Main extends Component {
     }
     return (
       <>
-        <ApiForm handleChange={this.handleChange} handleFormSubmit={this.handleFormSubmit}/>
+        <ApiForm handleChange={this.handleChange} handleFormSubmit={this.handleFormSubmit} getFreshData={this.getFreshData} />
         {this.state.apiKey && <section className={styles.bigGuy}>
           {!this.state.studentLoading && <Students students={this.state.students} selectStudent={this.handleClick} handleStudentSelect={this.handleStudentSelect}/>}
           {this.state.studentAsses && <Asses asses={this.state.studentAsses}/>}

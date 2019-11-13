@@ -1,0 +1,10 @@
+.assBoard {
+  display: flex;
+  flex-direction: column;
+  display: flex;
+  flex-grow: 1;
+
+  h2 {
+    margin-left: 1em;
+  }
+}

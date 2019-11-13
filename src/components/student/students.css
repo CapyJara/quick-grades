@@ -1,5 +1,7 @@
 .students {
-
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  width: 35%;
+  padding: 0;
 }

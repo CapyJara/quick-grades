@@ -18,7 +18,7 @@ Student.propTypes = {
   name: PropTypes.string.isRequired,
   pending: PropTypes.array.isRequired,
   missing: PropTypes.array.isRequired,
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   selectStudent: PropTypes.func.isRequired,
   handleStudentSelect: PropTypes.func.isRequired
 };

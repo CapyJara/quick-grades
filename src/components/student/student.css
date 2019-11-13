@@ -1,24 +1,39 @@
 .student {
-  display: flex;
+  list-style: none;
 
-  h2 {
-    width: 12em;
-    height: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0;
-    border: 2px solid black;
+  &:hover {
+    transform: scale(1.01);
   }
-  
+
   button {
-    width: 3em;
-    height: 2.3rem;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-left: 3px;
     padding: 0;
+    border: none;
+
+    &:focus {
+      outline: none;
+    }
+
+    h2 {
+      width: 12em;
+      height: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      border: 2px solid black;
+    }
+
+    span {
+      width: 3em;
+      height: 3em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 
   .pending {
@@ -28,5 +43,4 @@
   .missing {
     border: 2px solid rgb(245, 39, 39);
   }
-
 }

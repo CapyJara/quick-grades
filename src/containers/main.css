@@ -13,3 +13,8 @@
     height: 70%;
   }
 }
+
+.selected {
+  color: blue;
+  transform: scale(1.05);
+}

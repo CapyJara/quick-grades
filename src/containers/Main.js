@@ -25,6 +25,12 @@ class Main extends Component {
       .then(() => this.setState({ assLoading: false }));
   }
 
+  handleStudentSelect(e) {
+    const selected = document.querySelector(`.${styles.selected}`);
+    if(selected) selected.className = selected.className.replace(styles.selected, '').replace(' ', '');
+    e.currentTarget.className = `${e.currentTarget.className} ${styles.selected}`;
+  }
+
   render() {
     if(this.state.studentLoading) {
       return (
@@ -35,7 +41,7 @@ class Main extends Component {
     }
     return (
       <section className={styles.bigGuy}>
-        { !this.state.studentLoading && <Students students={this.state.students} selectStudent={this.handleClick}/>}
+        { !this.state.studentLoading && <Students students={this.state.students} selectStudent={this.handleClick} handleStudentSelect={this.handleStudentSelect}/>}
         {!this.state.assLoading && <Asses asses={this.state.studentAsses}/>}
       </section>
     );

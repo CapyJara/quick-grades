@@ -24,7 +24,10 @@ class Main extends Component {
 
   handleFormSubmit = (e) => {
     e.preventDefault();
-    this.setState({ studentLoading: true });
+    this.setState({ 
+      studentLoading: true,
+      studentAsses: null
+    });
     getAllStudents(this.state.apiKey)
       .then(students => this.setState({ students }))
       .then(() => this.setState({ studentLoading: false }))

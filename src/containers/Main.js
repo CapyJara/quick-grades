@@ -106,18 +106,12 @@ class Main extends Component {
         </section>
       );
     }
-    if(this.state.err) {
-      return (
-        <>
-          <ApiForm tas={this.state.tas} handleChange={this.handleChange} handleFormSubmit={this.handleFormSubmit} getFreshData={this.getFreshData} />
-          <h2>Could not fetch</h2>
-        </>
-      );
-    }
+
     return (
       <>
         <ApiForm tas={this.state.tas} handleChange={this.handleChange} handleFormSubmit={this.handleFormSubmit} getFreshData={this.getFreshData} />
-        {this.state.apiKey && <section className={styles.bigGuy}>
+        {this.state.err && <h2>Could not fetch</h2>}
+        {(!this.state.err && this.state.apiKey) && <section className={styles.bigGuy}>
           {!this.state.studentLoading && <Students filterTa={this.state.filterTa} students={this.state.students} selectStudent={this.handleClick} handleStudentSelect={this.handleStudentSelect}/>}
           {this.state.studentAsses && <Asses asses={this.state.studentAsses}/>}
           {this.state.assLoading && <div className={styles.scorpLoader}><img src={scorpion} /></div>}

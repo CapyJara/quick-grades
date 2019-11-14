@@ -99,24 +99,24 @@ class Main extends Component {
   }
 
   render() {
-    if(this.state.studentLoading) {
-      return (
-        <section className={styles.loading}>
-          <img src={loading} />
-        </section>
-      );
-    }
 
     return (
       <>
         <ApiForm tas={this.state.tas} handleChange={this.handleChange} handleFormSubmit={this.handleFormSubmit} getFreshData={this.getFreshData} />
         {this.state.err && <h2>Could not fetch</h2>}
-        {(!this.state.err && this.state.apiKey) && <section className={styles.bigGuy}>
-          {!this.state.studentLoading && <Students filterTa={this.state.filterTa} students={this.state.students} selectStudent={this.handleClick} handleStudentSelect={this.handleStudentSelect}/>}
-          {this.state.studentAsses && <Asses asses={this.state.studentAsses}/>}
-          {this.state.assLoading && <div className={styles.scorpLoader}><img src={scorpion} /></div>}
-          {this.state.assErr && <h2>Error loading asses</h2>}
-        </section>}
+        {this.state.studentLoading && 
+          <section className={styles.loading}>
+            <img src={loading} />
+          </section>
+        }
+        {((!this.state.err && this.state.apiKey) && !this.state.studentLoading) && 
+          <section className={styles.bigGuy}>
+            {!this.state.studentLoading && <Students filterTa={this.state.filterTa} students={this.state.students} selectStudent={this.handleClick} handleStudentSelect={this.handleStudentSelect}/>}
+            {this.state.studentAsses && <Asses asses={this.state.studentAsses}/>}
+            {this.state.assLoading && <div className={styles.scorpLoader}><img src={scorpion} /></div>}
+            {this.state.assErr && <h2>Error loading asses</h2>}
+          </section>
+        }
       </>
     );
   

@@ -10,26 +10,35 @@ import ApiForm from '../components/form/ApiForm';
 class Main extends Component {
   state = {
     students: [],
-    studentAsses: null,
+    studentAsses: false,
     studentLoading: false,
     assLoading: false,
-    apiKey: null,
-    err: null,
-    assErr: null,
-    tas: null,
-    filterTa: null
+    apiKey: false,
+    err: false,
+    assErr: false,
+    tas: false,
+    filterTa: false
   };
 
   handleChange = ({ target }) => {
-    this.setState({ [target.name]: target.value });
+    if(target.name === 'filterTa') {
+      this.removeSelectedStudent();
+      this.setState({ 
+        [target.name]: target.value,
+        studentAsses: false,
+      });
+    }
+    else {
+      this.setState({ [target.name]: target.value });
+    }
   }
 
   handleFormSubmit = (e) => {
     e.preventDefault();
     this.setState({ 
       studentLoading: true,
-      studentAsses: null,
-      filterTa: null
+      studentAsses: false,
+      filterTa: false
     });
     getAllStudents(this.state.apiKey)
       .then(students => this.setState({ 
@@ -46,8 +55,8 @@ class Main extends Component {
   handleClick = (kido) => {
     this.setState({ 
       assLoading: true,
-      studentAsses: null,
-      assErr: null
+      studentAsses: false,
+      assErr: false
     });
     getAsses(kido, this.state.apiKey)
       .then(asses => this.setState({
@@ -60,9 +69,13 @@ class Main extends Component {
       }));
   }
 
-  handleStudentSelect(e) {
+  removeSelectedStudent() {
     const selected = document.querySelector(`.${styles.selected}`);
     if(selected) selected.className = selected.className.replace(styles.selected, '').replace(' ', '');
+  }
+
+  handleStudentSelect = (e) => {
+    this.removeSelectedStudent();
     e.currentTarget.className = `${e.currentTarget.className} ${styles.selected}`;
   }
 
@@ -70,8 +83,8 @@ class Main extends Component {
     this.setState({
       studentLoading: true,
       students: [],
-      studentAsses: null,
-      filterTa: null
+      studentAsses: false,
+      filterTa: false
     });
     getFreshies(this.state.apiKey)
       .then(students => this.setState({ 

@@ -17,7 +17,7 @@ function Asses({ asses }) {
 }
 
 Asses.propTypes = {
-  asses: PropTypes.array.isRequired
+  asses: PropTypes.oneOfType([PropTypes.bool, PropTypes.array])
 };
 
 export default Asses;

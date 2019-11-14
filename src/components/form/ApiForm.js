@@ -30,7 +30,7 @@ ApiForm.propTypes = {
   handleFormSubmit: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,
   getFreshData: PropTypes.func.isRequired,
-  tas: PropTypes.array
+  tas: PropTypes.oneOfType([PropTypes.bool, PropTypes.array])
 };
 
 export default ApiForm;

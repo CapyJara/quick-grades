@@ -35,7 +35,7 @@ Students.propTypes = {
   students: PropTypes.array.isRequired,
   selectStudent: PropTypes.func.isRequired,
   handleStudentSelect: PropTypes.func.isRequired,
-  filterTa: PropTypes.string.isRequired
+  filterTa: PropTypes.string
 };
 
 export default Students;

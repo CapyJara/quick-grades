@@ -3,9 +3,13 @@ import PropTypes from 'prop-types';
 import Student from './Student';
 import styles from './students.css';
 
-const Students = ({ students, selectStudent, handleStudentSelect }) => {
+const Students = ({ filterTa, students, selectStudent, handleStudentSelect }) => {
   const studentItems = students
     .sort((a, b) => (b.pendingSubmissions.length - a.pendingSubmissions.length))
+    .filter(i => {
+      if(filterTa) return i.section.includes(filterTa);
+      return i;
+    })
     .map((student, i) => {
       return (
         <Student 
@@ -30,7 +34,8 @@ const Students = ({ students, selectStudent, handleStudentSelect }) => {
 Students.propTypes = {
   students: PropTypes.array.isRequired,
   selectStudent: PropTypes.func.isRequired,
-  handleStudentSelect: PropTypes.func.isRequired
+  handleStudentSelect: PropTypes.func.isRequired,
+  filterTa: PropTypes.string.isRequired
 };
 
 export default Students;

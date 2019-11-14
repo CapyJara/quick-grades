@@ -15,7 +15,9 @@ class Main extends Component {
     assLoading: false,
     apiKey: null,
     err: null,
-    assErr: null
+    assErr: null,
+    tas: null,
+    filterTa: null
   };
 
   handleChange = ({ target }) => {
@@ -26,11 +28,15 @@ class Main extends Component {
     e.preventDefault();
     this.setState({ 
       studentLoading: true,
-      studentAsses: null
+      studentAsses: null,
+      filterTa: null
     });
     getAllStudents(this.state.apiKey)
-      .then(students => this.setState({ students }))
-      .then(() => this.setState({ studentLoading: false }))
+      .then(students => this.setState({ 
+        students,
+        studentLoading: false, 
+        tas: [...new Set(students.map(i => i.section).flat())]
+      }))
       .catch(err => this.setState({ 
         err,
         studentLoading: false
@@ -43,8 +49,10 @@ class Main extends Component {
       studentAsses: null
     });
     getAsses(kido, this.state.apiKey)
-      .then(asses => this.setState(state => ({ ...state, studentAsses: asses })))
-      .then(() => this.setState({ assLoading: false }))
+      .then(asses => this.setState({
+        studentAsses: asses,
+        assLoading: false
+      }))
       .catch(err => this.setState({ 
         assErr: err,
         assLoading: false
@@ -61,14 +69,18 @@ class Main extends Component {
     this.setState({
       studentLoading: true,
       students: [],
-      studentAsses: null
+      studentAsses: null,
+      filterTa: null
     });
     getFreshies(this.state.apiKey)
-      .then(students => this.setState({ students }))
-      .then(() => this.setState({ studentLoading: false }))
+      .then(students => this.setState({ 
+        students,
+        studentLoading: false,
+        tas: [...new Set(students.map(i => i.section).flat())]
+      }))
       .catch(err => this.setState({ 
         err,
-        studentLoading: false
+        studentLoading: false,
       }));
   }
 
@@ -83,22 +95,23 @@ class Main extends Component {
     if(this.state.err) {
       return (
         <>
-          <ApiForm handleChange={this.handleChange} handleFormSubmit={this.handleFormSubmit} getFreshData={this.getFreshData} />
+          <ApiForm tas={this.state.tas} handleChange={this.handleChange} handleFormSubmit={this.handleFormSubmit} getFreshData={this.getFreshData} />
           <h2>Could not fetch</h2>
         </>
       );
     }
     return (
       <>
-        <ApiForm handleChange={this.handleChange} handleFormSubmit={this.handleFormSubmit} getFreshData={this.getFreshData} />
+        <ApiForm tas={this.state.tas} handleChange={this.handleChange} handleFormSubmit={this.handleFormSubmit} getFreshData={this.getFreshData} />
         {this.state.apiKey && <section className={styles.bigGuy}>
-          {!this.state.studentLoading && <Students students={this.state.students} selectStudent={this.handleClick} handleStudentSelect={this.handleStudentSelect}/>}
+          {!this.state.studentLoading && <Students filterTa={this.state.filterTa} students={this.state.students} selectStudent={this.handleClick} handleStudentSelect={this.handleStudentSelect}/>}
           {this.state.studentAsses && <Asses asses={this.state.studentAsses}/>}
           {this.state.assLoading && <div className={styles.scorpLoader}><img src={scorpion} /></div>}
           {this.state.assErr && <h2>Error loading asses</h2>}
         </section>}
       </>
     );
+  
   }
 }
 

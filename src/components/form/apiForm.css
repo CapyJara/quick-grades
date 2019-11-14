@@ -5,5 +5,18 @@
 
   button {
     margin-right: 15px;
+    height: 2em;
+  }
+
+  input {
+    width: 23em;
+    height: 1.7em;
+  }
+}
+
+.filter {
+  margin-top: 4px;
+  p {
+    margin: 2px
   }
 }

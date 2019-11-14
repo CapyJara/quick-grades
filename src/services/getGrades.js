@@ -31,6 +31,7 @@ export function getFreshies(apiKey) {
 }
 
 export function getAsses(kido, apiKey) {
+  if(kido.pending.length === 0) return Promise.resolve([{ name: 'No Ungraded Asses', url: null }]);
   const assIds = kido.pending.map(ass => ass.assignmentId).join(',');
   return fetch(`https://thawing-dusk-78361.herokuapp.com/api/v1/canvas/assignments?ids=${assIds}&student=${kido.id}`, {
     headers: {

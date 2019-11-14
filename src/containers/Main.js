@@ -46,7 +46,8 @@ class Main extends Component {
   handleClick = (kido) => {
     this.setState({ 
       assLoading: true,
-      studentAsses: null
+      studentAsses: null,
+      assErr: null
     });
     getAsses(kido, this.state.apiKey)
       .then(asses => this.setState({

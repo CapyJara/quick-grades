@@ -80,12 +80,17 @@ class Main extends Component {
   }
 
   getFreshData = () => {
+    document.querySelector('#student-select').selectedIndex = 0;
+    document.querySelector('#api-input').value = null;
+
     this.setState({
       studentLoading: true,
       students: [],
       studentAsses: false,
-      filterTa: false
+      filterTa: false,
+      err: false
     });
+
     getFreshies(this.state.apiKey)
       .then(students => this.setState({ 
         students,

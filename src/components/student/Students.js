@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import Student from './Student';
 import styles from './students.css';
 
-const Students = ({ filterTa, students, selectStudent, handleStudentSelect }) => {
+const Students = ({ filterTa, students, handleStudentSelect }) => {
   const studentItems = students
-    .sort((a, b) => (b.pendingSubmissions.length - a.pendingSubmissions.length))
+    .sort((a, b) => (b.pending.length - a.pending.length))
     .filter(i => {
       if(filterTa) return i.section.includes(filterTa);
       return i;
@@ -16,9 +16,8 @@ const Students = ({ filterTa, students, selectStudent, handleStudentSelect }) =>
           key={i} 
           id={student.id}
           name={student.name} 
-          pending={student.pendingSubmissions} 
-          missing={student.missingSubmissions}
-          selectStudent={selectStudent} 
+          pending={student.pending} 
+          missing={student.missing}
           handleStudentSelect={handleStudentSelect}
         />
       );
@@ -33,7 +32,6 @@ const Students = ({ filterTa, students, selectStudent, handleStudentSelect }) =>
 
 Students.propTypes = {
   students: PropTypes.array.isRequired,
-  selectStudent: PropTypes.func.isRequired,
   handleStudentSelect: PropTypes.func.isRequired,
   filterTa: PropTypes.oneOfType([PropTypes.bool, PropTypes.string])
 };

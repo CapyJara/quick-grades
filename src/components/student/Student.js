@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './student.css';
 
-const Student = ({ id, name, pending, missing, selectStudent, handleStudentSelect }) => {
+const Student = ({ id, name, pending, missing, handleStudentSelect }) => {
   return (
-    <li className={styles.student} onClick={handleStudentSelect}>
-      <button onClick={() => selectStudent({ id, pending, name })}>
+    <li className={styles.student} >
+      <button onClick={(event) => handleStudentSelect(id, event)}>
         <h2>{name}</h2>
-        <span className={styles.missing}>{missing.length}</span>
-        <span className={styles.pending} >{pending.length}</span>
+        <span className={styles.missing}>{missing}</span>
+        <span className={styles.pending} >{pending}</span>
       </button>
     </li>
   );
@@ -16,10 +16,9 @@ const Student = ({ id, name, pending, missing, selectStudent, handleStudentSelec
 
 Student.propTypes = {
   name: PropTypes.string.isRequired,
-  pending: PropTypes.array.isRequired,
-  missing: PropTypes.array.isRequired,
+  pending: PropTypes.number.isRequired,
+  missing: PropTypes.number.isRequired,
   id: PropTypes.string.isRequired,
-  selectStudent: PropTypes.func.isRequired,
   handleStudentSelect: PropTypes.func.isRequired
 };
 

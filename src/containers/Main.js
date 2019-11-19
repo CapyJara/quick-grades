@@ -3,8 +3,7 @@ import { getAllStudentsV2, getFreshies } from '../services/getGrades';
 import Students from '../components/student/Students';
 import Asses from '../components/asses/Asses';
 import styles from './main.css';
-import loading from '../../assets/loading.gif';
-// import scorpion from '../../assets/scorpion.png';
+import scorpion from '../../assets/scorpion.png';
 import ApiForm from '../components/form/ApiForm';
 import { studentDeets } from '../utils/studentDeets';
 
@@ -38,7 +37,8 @@ class Main extends Component {
       studentLoading: true,
       filterTa: false,
       tas: false,
-      students: []
+      students: [],
+      err: false
     });
     getAllStudentsV2(this.state.apiKey)
       .then(res => {
@@ -104,8 +104,8 @@ class Main extends Component {
 
         {this.state.err && <h2>Could not fetch</h2>}
         {this.state.studentLoading && 
-          <section className={styles.loading}>
-            <img src={loading} />
+          <section className={styles.scorpLoader}>
+            <img src={scorpion} />
           </section>
         }
 

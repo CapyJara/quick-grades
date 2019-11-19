@@ -1,16 +1,9 @@
 .bigGuy {
-  display: flex;
-}
+  display: grid;
+  grid-auto-columns: 1fr 1fr;
 
-.loading {
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  img {
-    height: 70%;
+  div {
+    grid-column-start: 2;
   }
 }
 
@@ -29,14 +22,14 @@
 }
 
 .scorpLoader {
-  width: 100%;
   display: flex;
   justify-content: center;
   align-items: flex-start;
 
   img {
-    height: 25em;
+    height: 45em;
     animation-name: spinner;
     animation-duration: 1.5s;
+    animation-iteration-count: infinite;
   }
 }

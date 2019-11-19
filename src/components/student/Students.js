@@ -5,9 +5,9 @@ import styles from './students.css';
 
 const Students = ({ filterTa, students, handleStudentSelect }) => {
   const studentItems = students
-    .sort((a, b) => (b.pending.length - a.pending.length))
+    .sort((a, b) => (b.pending - a.pending))
     .filter(i => {
-      if(filterTa) return i.section.includes(filterTa);
+      if(filterTa) return i.sectionNames.includes(filterTa);
       return i;
     })
     .map((student, i) => {

@@ -6,7 +6,7 @@ import styles from './main.css';
 import loading from '../../assets/loading.gif';
 // import scorpion from '../../assets/scorpion.png';
 import ApiForm from '../components/form/ApiForm';
-import { studentDeets } from '../../data/v2datamanip';
+import { studentDeets } from '../utils/studentDeets';
 
 class Main extends Component {
   state = {
@@ -36,7 +36,9 @@ class Main extends Component {
     e.preventDefault();
     this.setState({ 
       studentLoading: true,
-      filterTa: false
+      filterTa: false,
+      tas: false,
+      students: []
     });
     getAllStudentsV2(this.state.apiKey)
       .then(res => {

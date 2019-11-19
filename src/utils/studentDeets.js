@@ -7,7 +7,8 @@ export const studentDeets = json => {
           name: val.name, 
           id: val.id, 
           missing: val.missing.length, 
-          pending: val.pending.length
+          pending: val.pending.length,
+          sectionNames: val.sectionNames
         }
       ],
       studentPendingAsses: {
@@ -20,4 +21,3 @@ export const studentDeets = json => {
     studentPendingAsses: {},
   });
 };
-

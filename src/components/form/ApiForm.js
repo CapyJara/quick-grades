@@ -21,7 +21,7 @@ const ApiForm = ({ tas, handleChange, handleFormSubmit, getFreshData }) => {
           </>}
         </form>
       </div>
-      <button onClick={getFreshData}>Get Fresh Data</button>
+      {tas && <button onClick={getFreshData}>Get Fresh Data</button>}
     </section>
   );
 };

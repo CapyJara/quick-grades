@@ -20,6 +20,7 @@ export function getAllStudents(apiKey) {
 
 // eslint-disable-next-line no-unused-vars
 export function getFreshies(apiKey) {
+  if(apiKey === 'test') return Promise.resolve(dummyData);
   return fetch('https://thawing-dusk-78361.herokuapp.com/api/v1/canvas/invalidate', {
     headers: {
       'x-api-key': apiKey

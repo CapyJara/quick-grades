@@ -1,13 +1,19 @@
 import React from 'react';
-import Main from '../containers/Main';
-import styles from './app.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from 'react-router-dom';
+import QuickGrades from './pages/QuickGrades';
+import TestAss from './pages/TestAss';
 
 export default function App() {
   return (
-    <section className={styles.app}>
-      <h1>Slightly Quickr Grading</h1>
-      <Main />
-    </section>
+    <Router >
+      <Switch>
+        <Route exact path="/" component={QuickGrades} />
+        <Route path="/ass" component={TestAss} />
+      </Switch>
+    </Router>
   );
 }
-  

@@ -1,23 +1,22 @@
 import React, { Component } from 'react';
-import { getAllStudents, getAsses, getFreshies } from '../services/getGrades';
+import { getAllStudentsV2, getFreshies } from '../services/getGrades';
 import Students from '../components/student/Students';
 import Asses from '../components/asses/Asses';
 import styles from './main.css';
-import loading from '../../assets/loading.gif';
 import scorpion from '../../assets/scorpion.png';
 import ApiForm from '../components/form/ApiForm';
+import { studentDeets } from '../utils/studentDeets';
 
 class Main extends Component {
   state = {
     students: [],
-    studentAsses: false,
+    studentAsses: {},
     studentLoading: false,
-    assLoading: false,
     apiKey: false,
     err: false,
-    assErr: false,
     tas: false,
-    filterTa: false
+    filterTa: false,
+    selectedStudent: false
   };
 
   handleChange = ({ target }) => {
@@ -25,7 +24,6 @@ class Main extends Component {
       this.removeSelectedStudent();
       this.setState({ 
         [target.name]: target.value,
-        studentAsses: false,
       });
     }
     else {
@@ -36,46 +34,38 @@ class Main extends Component {
   handleFormSubmit = (e) => {
     e.preventDefault();
     this.setState({ 
+      students: [],
       studentLoading: true,
-      studentAsses: false,
-      filterTa: false
+      err: false,
+      tas: false,
+      filterTa: false,
+      selectStudent: false
     });
-    getAllStudents(this.state.apiKey)
-      .then(students => this.setState({ 
-        students,
-        studentLoading: false, 
-        tas: [...new Set(students.map(i => i.section).flat())]
-      }))
+    getAllStudentsV2(this.state.apiKey)
+      .then(res => {
+        const studentsDetails = studentDeets(res);
+        this.setState({ 
+          studentLoading: false, 
+          students: studentsDetails.students,
+          studentAsses: studentsDetails.studentPendingAsses,
+          tas: [...new Set(res.map(i => i.sectionNames).flat())]
+        });
+      })
       .catch(err => this.setState({ 
         err,
         studentLoading: false
       }));
   }
 
-  handleClick = (kido) => {
-    this.setState({ 
-      assLoading: true,
-      studentAsses: false,
-      assErr: false
-    });
-    getAsses(kido, this.state.apiKey)
-      .then(asses => this.setState({
-        studentAsses: asses,
-        assLoading: false
-      }))
-      .catch(err => this.setState({ 
-        assErr: err,
-        assLoading: false
-      }));
-  }
-
   removeSelectedStudent() {
+    this.setState({ selectStudent: false });
     const selected = document.querySelector(`.${styles.selected}`);
     if(selected) selected.className = selected.className.replace(styles.selected, '').replace(' ', '');
   }
 
-  handleStudentSelect = (e) => {
+  handleStudentSelect = (id, e) => {
     this.removeSelectedStudent();
+    this.setState({ selectStudent: id });
     e.currentTarget.className = `${e.currentTarget.className} ${styles.selected}`;
   }
 
@@ -86,16 +76,16 @@ class Main extends Component {
     this.setState({
       studentLoading: true,
       students: [],
-      studentAsses: false,
       filterTa: false,
-      err: false
+      err: false,
+      selectStudent: false
     });
 
     getFreshies(this.state.apiKey)
       .then(students => this.setState({ 
         students,
         studentLoading: false,
-        tas: [...new Set(students.map(i => i.section).flat())]
+        tas: [...new Set(students.map(i => i.sectionNames).flat())]
       }))
       .catch(err => this.setState({ 
         err,
@@ -107,19 +97,31 @@ class Main extends Component {
 
     return (
       <>
-        <ApiForm tas={this.state.tas} handleChange={this.handleChange} handleFormSubmit={this.handleFormSubmit} getFreshData={this.getFreshData} />
+        <ApiForm 
+          tas={this.state.tas} 
+          handleChange={this.handleChange} 
+          handleFormSubmit={this.handleFormSubmit} 
+          getFreshData={this.getFreshData} 
+        />
+
         {this.state.err && <h2>Could not fetch</h2>}
         {this.state.studentLoading && 
-          <section className={styles.loading}>
-            <img src={loading} />
+          <section className={styles.scorpLoader}>
+            <img src={scorpion} />
           </section>
         }
-        {((!this.state.err && this.state.apiKey) && !this.state.studentLoading) && 
+
+        {!this.state.studentLoading && 
           <section className={styles.bigGuy}>
-            {!this.state.studentLoading && <Students filterTa={this.state.filterTa} students={this.state.students} selectStudent={this.handleClick} handleStudentSelect={this.handleStudentSelect}/>}
-            {this.state.studentAsses && <Asses asses={this.state.studentAsses}/>}
-            {this.state.assLoading && <div className={styles.scorpLoader}><img src={scorpion} /></div>}
-            {this.state.assErr && <h2>Error loading asses</h2>}
+            <Students 
+              filterTa={this.state.filterTa} 
+              students={this.state.students} 
+              handleStudentSelect={this.handleStudentSelect}
+            />
+
+            {this.state.selectStudent && 
+              <Asses asses={this.state.studentAsses[this.state.selectStudent]}
+              />}
           </section>
         }
       </>
@@ -129,3 +131,6 @@ class Main extends Component {
 }
 
 export default Main;
+
+
+

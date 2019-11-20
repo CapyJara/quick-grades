@@ -57,13 +57,14 @@ class Main extends Component {
   }
 
   removeSelectedStudent() {
+    this.setState({ selectStudent: false });
     const selected = document.querySelector(`.${styles.selected}`);
     if(selected) selected.className = selected.className.replace(styles.selected, '').replace(' ', '');
   }
 
   handleStudentSelect = (id, e) => {
-    this.setState({ selectStudent: id });
     this.removeSelectedStudent();
+    this.setState({ selectStudent: id });
     e.currentTarget.className = `${e.currentTarget.className} ${styles.selected}`;
   }
 

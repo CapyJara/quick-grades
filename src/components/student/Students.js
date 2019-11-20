@@ -10,10 +10,10 @@ const Students = ({ filterTa, students, handleStudentSelect }) => {
       if(filterTa) return i.sectionNames.includes(filterTa);
       return i;
     })
-    .map((student, i) => {
+    .map(student => {
       return (
         <Student 
-          key={i} 
+          key={student.id} 
           id={student.id}
           name={student.name} 
           pending={student.pending} 

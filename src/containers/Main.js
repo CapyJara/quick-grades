@@ -37,19 +37,18 @@ const Main = () => {
         </section>
       }
 
-      {!studentsLoading && 
-        <section className={styles.bigGuy}>
-          <Students 
-            filterTa={filterTa} 
-            students={students} 
-            handleStudentSelect={handleStudentSelect}
-          />
+      <section className={styles['details-display']}>
+        <Students 
+          filterTa={filterTa} 
+          students={students} 
+          handleStudentSelect={handleStudentSelect}
+        />
 
-          {selectedStudent && 
+        {selectedStudent && 
             <Asses asses={studentAsses[selectedStudent]}
             />}
-        </section>
-      }
+      </section>
+
     </>
   );
 };

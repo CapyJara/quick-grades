@@ -34,11 +34,12 @@ class Main extends Component {
   handleFormSubmit = (e) => {
     e.preventDefault();
     this.setState({ 
-      studentLoading: true,
-      filterTa: false,
-      tas: false,
       students: [],
-      err: false
+      studentLoading: true,
+      err: false,
+      tas: false,
+      filterTa: false,
+      selectStudent: false
     });
     getAllStudentsV2(this.state.apiKey)
       .then(res => {

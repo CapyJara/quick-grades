@@ -1,6 +1,6 @@
 .bigGuy {
   display: grid;
-  grid-auto-columns: 1fr 1fr;
+  grid-auto-columns: 1fr 2fr;
 
   div {
     grid-column-start: 2;

@@ -1,6 +1,5 @@
 import dummyData from '../../data/test-data.json';
 
-// eslint-disable-next-line no-unused-vars
 export function getAllStudents(apiKey) {
   if(apiKey === 'test') return Promise.resolve(dummyData);
   else {
@@ -14,11 +13,9 @@ export function getAllStudents(apiKey) {
         if(!ok) throw 'unable to fatch';
         return json;
       });
-  // return Promise.resolve(students);
   }
 }
 
-// eslint-disable-next-line no-unused-vars
 export function getFreshies(apiKey) {
   if(apiKey === 'test') return Promise.resolve(dummyData);
   return fetch('https://thawing-dusk-78361.herokuapp.com/api/v1/canvas/invalidate', {

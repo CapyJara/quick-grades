@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`QuickGrades component renders QuickGrades 1`] = `
+<section
+  className="app"
+>
+  <h1>
+    Slightly Quickr Grading
+  </h1>
+  <Main />
+</section>
+`;

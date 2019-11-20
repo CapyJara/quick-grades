@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TestAss component renders TestAss 1`] = `
+<Fragment>
+  <h1>
+    Sorry
+  </h1>
+  <h3>
+    You cant actually look at students grades if you"re using the “TEST“ api key
+  </h3>
+</Fragment>
+`;

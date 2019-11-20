@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App component renders App 1`] = `
+<div
+  className="assBoard"
+>
+  <h2>
+    Submitted but not yet graded
+  </h2>
+  <ul>
+    <Ass
+      ass={
+        Object {
+          "assignmentName": "todo",
+          "gradeUrl": "http",
+        }
+      }
+      key="0"
+    />
+    <Ass
+      ass={
+        Object {
+          "assignmentName": "todo",
+          "gradeUrl": "http",
+        }
+      }
+      key="1"
+    />
+    <Ass
+      ass={
+        Object {
+          "assignmentName": "todo",
+          "gradeUrl": "http",
+        }
+      }
+      key="2"
+    />
+  </ul>
+</div>
+`;

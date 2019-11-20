@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App component renders App 1`] = `
+<li
+  className="student"
+>
+  <button
+    onClick={[Function]}
+  >
+    <h2>
+      mike
+    </h2>
+    <span
+      className="missing"
+    >
+      2
+    </span>
+    <span
+      className="pending"
+    >
+      4
+    </span>
+  </button>
+</li>
+`;

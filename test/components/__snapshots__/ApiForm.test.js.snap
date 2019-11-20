@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ApiForm component renders ApiForm 1`] = `
+<section
+  className="apiForm"
+>
+  <div>
+    <form
+      onSubmit={[MockFunction]}
+    >
+      <input
+        id="api-input"
+        name="apiKey"
+        onChange={[MockFunction]}
+        placeholder="Enter your api key"
+        required={true}
+        type="text"
+      />
+      <button>
+        Enter key
+      </button>
+    </form>
+    <form
+      className="filter"
+    >
+      <p>
+        Filter By TA
+      </p>
+      <select
+        id="student-select"
+        name="filterTa"
+        onChange={[MockFunction]}
+      >
+        <option />
+      </select>
+    </form>
+  </div>
+  <button
+    onClick={[MockFunction]}
+  >
+    Get Fresh Data
+  </button>
+</section>
+`;

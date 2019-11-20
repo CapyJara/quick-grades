@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Main component renders Main 1`] = `
+<Fragment>
+  <ApiForm
+    getFreshData={[Function]}
+    handleChange={[Function]}
+    handleFormSubmit={[Function]}
+    tas={false}
+  />
+  <section
+    className="details-display"
+  >
+    <Students
+      filterTa={false}
+      handleStudentSelect={[Function]}
+      students={Array []}
+    />
+  </section>
+</Fragment>
+`;

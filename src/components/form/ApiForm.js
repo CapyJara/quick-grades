@@ -6,22 +6,38 @@ const ApiForm = ({ tas, handleChange, handleFormSubmit, getFreshData }) => {
   return (
     <section className={styles.apiForm}>
       <div>
+
         <form onSubmit={handleFormSubmit} >
-          <input id='api-input' name="apiKey" type="text" placeholder='Enter your api key' onChange={handleChange} />
+          <input
+            id='api-input'
+            name="apiKey" type="text"
+            placeholder='Enter your api key'
+            onChange={handleChange} 
+            required
+          />
           <button>Enter key</button>
         </form>
+
         <form className={styles.filter}>
           {tas && 
           <>
             <p>Filter By TA</p>
-            <select id='student-select' name='filterTa' onChange={handleChange}>
+            
+            <select 
+              id='student-select'
+              name='filterTa'
+              onChange={handleChange}
+            >
               <option></option>
               {tas.map(i => <option key={i}>{i}</option>)}
             </select>
           </>}
         </form>
+
       </div>
+
       {tas && <button onClick={getFreshData}>Get Fresh Data</button>}
+
     </section>
   );
 };

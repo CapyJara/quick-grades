@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { getAllStudentsV2, getFreshies } from '../services/getGrades';
+import { getAllStudents, getFreshies } from '../services/getGrades';
 import { studentDeets } from '../utils/studentDeets';
 import styles from '../containers/main.css';
 
@@ -58,7 +58,7 @@ const useMain = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    callApi(getAllStudentsV2);
+    callApi(getAllStudents);
   };
 
   const getFreshData = (e) => {

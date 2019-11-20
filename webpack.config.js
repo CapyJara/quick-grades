@@ -19,7 +19,7 @@ module.exports = {
     new CleanWebpackPlugin(),
     new DotEnv({ systemvars: true }),
     new CopyPlugin([
-      { from: 'public' },
+      { from: './public' },
     ])
   ],
   module: {

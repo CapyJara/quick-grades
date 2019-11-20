@@ -8,7 +8,7 @@ function Ass({ ass }) {
     <li className={styles.ass}>
       {ass.gradeUrl ? 
         <a href={ass.gradeUrl} target="_blank" rel="noopener noreferrer" >{ass.assignmentName}</a> : 
-        <Link to="/ass" >{ass.assignmentName}</Link>}
+        <Link to="/ass" target="_blank" rel="noopener noreferrer" >{ass.assignmentName}</Link>}
     </li>
   );
 }

@@ -18,7 +18,7 @@ export function getAllStudents(apiKey) {
 
 export function getFreshies(apiKey) {
   if(apiKey === 'test') return Promise.resolve(dummyData);
-  return fetch('https://thawing-dusk-78361.herokuapp.com/api/v1/canvas/invalidate', {
+  return fetch('https://thawing-dusk-78361.herokuapp.com/api/v2/canvas/invalidate', {
     headers: {
       'x-api-key': apiKey
     } 

@@ -1,8 +1,9 @@
 .ass {
+  display: flex;
   list-style: none;
 
-  &:hover {
-    font-size: 1.1em;
+  a:hover {
+    background-color: rgba(0, 0, 0, 0.07);
   }
 
   a {

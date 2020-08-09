@@ -7,11 +7,11 @@ function Asses({ asses }) {
   return  (
     <div className={styles.assBoard}>
       <h2>Submitted but not yet graded</h2>
-      <ul>
+      <div>
         {asses.map((ass, i) => {
           return (<Ass key={i} ass={ass} />);
         })}
-      </ul>
+      </div>
     </div>
   );
 }

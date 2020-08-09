@@ -47,13 +47,9 @@ const useMain = () => {
     preFetchReset();
 
     apiCall(apiKey)
-      .then(res => {
-        postFetchSetState(res);
-      })
-      .catch(err => {
-        setErr(err);
-        setStudentsLoading(false);
-      });
+      .then(postFetchSetState)
+      .catch(setErr)
+      .finally(() => setStudentsLoading(false));
   };
 
   const handleFormSubmit = (e) => {

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {
   FaCheck,
   FaTimes,
+  FaQuestion,
   FaRegFile,
   FaMinusCircle,
   FaPlusCircle,
@@ -16,7 +17,7 @@ const MergeableState = ({ mergeableState }) => (
     {
       mergeableState === 'clean'
         ? <FaCheck className={styles.check} />
-        : <FaTimes className={styles.times} />
+        : mergeableState === 'unstable' ? <FaTimes className={styles.times} /> : <FaQuestion />
     }
   </>
 );
